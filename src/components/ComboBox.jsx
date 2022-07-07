@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useGlobalContext } from "../context";
 
 const ComboBox = () => {
   const [searchTerms, setSearchTerms] = useState([]);
-
+  const navigate = useNavigate();
   const { products } = useGlobalContext();
   useEffect(() => {
     if (products) {
@@ -27,13 +28,10 @@ const ComboBox = () => {
       id="combo-box-demo"
       options={searchTerms}
       style={{ width: 300 }}
-      onChange={(e, value) => console.log(value.id)}
+      onChange={(e, value) => navigate(`product/${value.id}`)}
       renderInput={(params) => (
         <TextField {...params} label="Search...." variant="outlined" />
       )}
-      //onChange={(value) => console.log(value.id)}
-      // onChange={(e, value) => console.log(e.target, value.id)}
-      //is all you need to get the id
     />
   );
 };
