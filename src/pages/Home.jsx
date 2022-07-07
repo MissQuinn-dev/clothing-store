@@ -1,16 +1,28 @@
 import React from "react";
-import CartItem from "../components/cart/CartItem";
+import Loading from "../components/Loading";
+import ProductCategory from "../components/products/ProductCategory";
+import Carousel from "react-material-ui-carousel";
+import NavDrawer from "../components/NavDrawer";
+import { useGlobalContext } from "../context";
+
 const Home = () => {
-  const fakeItem = {
-    id: "butts",
-    title: "turtle",
-    price: 6.69,
-  };
+  const { products, loading, categoryArray } = useGlobalContext();
+
+  if (loading) {
+    return <Loading />;
+  }
+  if (products.length < 1) {
+    return <h2>you need to have a category to show it</h2>;
+  }
+
   return (
-    <nav>
-      <h2>home</h2>
-      <CartItem {...fakeItem}></CartItem>
-    </nav>
+    <React.Fragment>
+      <Carousel>
+        {categoryArray.map((categoryArray, id) => {
+          return <ProductCategory key={id} {...categoryArray} />;
+        })}
+      </Carousel>
+    </React.Fragment>
   );
 };
 

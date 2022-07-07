@@ -6,10 +6,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { useGlobalContext } from "../../context";
 
 const ProductItem = ({ id, title, price, category, description, image }) => {
-  const { remove } = useGlobalContext();
   return (
     <Grid item xs={3}>
       <Card style={{ maxWidth: 300 }}>
@@ -29,8 +27,8 @@ const ProductItem = ({ id, title, price, category, description, image }) => {
         </CardContent>
         <CardActions>
           <Button size="small">{category}</Button>
-          <Button size="small" color="secondary " onClick={() => remove(id)}>
-            Add to cart
+          <Button href={`/product/${id}`} size="small">
+            learn more
           </Button>
         </CardActions>
       </Card>

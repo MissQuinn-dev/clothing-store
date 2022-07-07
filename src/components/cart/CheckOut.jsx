@@ -112,7 +112,7 @@ export default function CheckOut() {
                   <Button onClick={handleComplete}>
                     {completedSteps() === totalSteps() - 1
                       ? "Finish"
-                      : "Complete Step"}
+                      : "Submit this Step"}
                   </Button>
                 ))}
             </Box>

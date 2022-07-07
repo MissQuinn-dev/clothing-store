@@ -1,0 +1,13 @@
+{
+  /* <Grid
+            container
+            direction="row"
+            justifyContent="space-left"
+            alignItems="stretch"
+            spacing={1}
+          >
+            {categoryArray.map((product, index) => {
+              return <ProductCategory key={index} {...product} />;
+            })}
+          </Grid> */
+}

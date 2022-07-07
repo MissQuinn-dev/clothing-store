@@ -5,8 +5,17 @@ import reportWebVitals from "./reportWebVitals";
 import { AppProvider } from "./context";
 import { ThemeProvider, createTheme } from "@mui/material";
 const theme = createTheme({
-  status: {
-    danger: "FFA500",
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        colorInherit: {
+          backgroundColor: "#FFD7EA",
+        },
+      },
+      defaultProps: {
+        color: "inherit",
+      },
+    },
   },
 });
 

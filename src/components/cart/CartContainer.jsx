@@ -8,10 +8,10 @@ const CartContainer = () => {
   if (cart.length === 0) {
     return (
       <Box sx={{ width: "100%" }} style={{ marginTop: 100 }}>
-        <section className="cart" style={{ marginTop: 100 }}>
+        <section style={{ marginTop: 100 }}>
           <header>
             <h2>your bag</h2>
-            <h4 className="empty-cart">is currently empty</h4>
+            <h4>is currently empty</h4>
           </header>
         </section>
       </Box>

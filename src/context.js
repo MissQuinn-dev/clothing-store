@@ -4,7 +4,7 @@ import cartItems from "./data";
 import { useCallback } from "react";
 // IMport loading whereever the heck it goes maby here
 
-const url = "https://fakestoreapi.com/products";
+const url = "http://localhost:4000/products";
 const AppContext = React.createContext();
 
 const initialState = {
@@ -15,43 +15,28 @@ const initialState = {
 };
 
 const AppProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [cartItems, setCartItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [products, setProducts] = useState([]);
 
-  const fetchCartItems = useCallback(async () => {
+  const fetchProduct = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${url}${searchTerm}`);
+      const response = await fetch(`${url}/${searchTerm}`);
       const data = await response.json();
-      console.log(data);
-      const { cartItems } = data;
-      if (cartItems) {
-        const newCartItem = cartItems.map((item) => {
-          const { id, title, price, category, description, image } = item;
-          return {
-            id: id,
-            title: title,
-            price: price,
-            category: category,
-            description: description,
-            img: image,
-          };
-        });
-        setCartItems(newCartItem);
-      } else {
-        setCartItems([]);
+      if (data) {
+        setProducts(data);
+        setLoading(false);
       }
-      setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   }, [searchTerm]);
   useEffect(() => {
-    fetchCartItems();
-  }, [searchTerm, fetchCartItems]);
+    fetchProduct();
+  }, [searchTerm, fetchProduct]);
 
   const clearCart = () => {
     dispatch({ type: "CLEAR_CART" });
@@ -81,6 +66,13 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     dispatch({ type: "GET_TOTALS" });
   }, [state.cart]);
+
+  const categoryKey = "category";
+
+  const categoryArray = [
+    ...new Map(products.map((item) => [item[categoryKey], item])).values(),
+  ];
+
   return (
     <AppContext.Provider
       value={{
@@ -94,6 +86,9 @@ const AppProvider = ({ children }) => {
         cartItems,
         searchTerm,
         setSearchTerm,
+        setProducts,
+        products,
+        categoryArray,
       }}
     >
       {children}
