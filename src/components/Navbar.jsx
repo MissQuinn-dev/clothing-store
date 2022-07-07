@@ -1,22 +1,20 @@
 import React from "react";
 import { styled, alpha } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import NavDrawer from "./NavDrawer";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Button from "@mui/material/Button";
 import ComboBox from "./ComboBox";
 import { useGlobalContext } from "../context";
-import { useTheme } from "@mui/material/styles";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -35,16 +33,6 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
   const { categoryArray } = useGlobalContext();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -84,8 +72,42 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem>
+        <Link
+          onClick={handleMenuClose}
+          to="/"
+          style={{ textDecoration: "none" }}
+        >
+          Home
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link
+          onClick={handleMenuClose}
+          to="/products"
+          style={{ textDecoration: "none" }}
+        >
+          Products
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link
+          onClick={handleMenuClose}
+          to="/cartcontainer"
+          style={{ textDecoration: "none" }}
+        >
+          Cart
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link
+          onClick={handleMenuClose}
+          to="/checkout"
+          style={{ textDecoration: "none" }}
+        >
+          Check Out
+        </Link>
+      </MenuItem>
     </Menu>
   );
 
@@ -114,17 +136,50 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Cart</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
+      <MenuItem>
+        <Link
+          m={8}
+          onClick={handleMenuClose}
+          to="/"
+          style={{ textDecoration: "none", color: "black" }}
         >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
+          Home
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link
+          onClick={handleMenuClose}
+          to="/products"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          Products
+        </Link>
+      </MenuItem>
+
+      <MenuItem>
+        <Link
+          onClick={handleMenuClose}
+          to="/checkout"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          Check Out
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link
+          onClick={handleMenuClose}
+          to="/cartcontainer"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <IconButton
+            size="large"
+            aria-label="show 13 new items"
+            color="inherit"
+          ></IconButton>
+          <Badge badgeContent={13} color="error">
+            <ShoppingCartOutlinedIcon />
+          </Badge>
+        </Link>
       </MenuItem>
     </Menu>
   );

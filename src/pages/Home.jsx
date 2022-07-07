@@ -2,7 +2,6 @@ import React from "react";
 import Loading from "../components/Loading";
 import ProductCategory from "../components/products/ProductCategory";
 import Carousel from "react-material-ui-carousel";
-import NavDrawer from "../components/NavDrawer";
 import { useGlobalContext } from "../context";
 
 const Home = () => {
