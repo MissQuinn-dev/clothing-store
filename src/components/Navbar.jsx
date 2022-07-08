@@ -1,38 +1,38 @@
-import React from "react";
-import { styled, alpha } from "@mui/material/styles";
-import { Link } from "react-router-dom";
-import NavDrawer from "./NavDrawer";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import Button from "@mui/material/Button";
-import ComboBox from "./ComboBox";
-import { useGlobalContext } from "../context";
+import React from 'react';
+import { styled, alpha } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
+import NavDrawer from './NavDrawer';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MoreIcon from '@mui/icons-material/MoreVert';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import Button from '@mui/material/Button';
+import ComboBox from './ComboBox';
+import { useGlobalContext } from '../context';
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.4),
-  "&:hover": {
+  '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.55),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
-    width: "auto",
+    width: 'auto',
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export const Navbar = () => {
   const { categoryArray } = useGlobalContext();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -55,75 +55,59 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = "primary-search-account-menu";
+  const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
       <MenuItem>
-        <Link
-          onClick={handleMenuClose}
-          to="/"
-          style={{ textDecoration: "none" }}
-        >
+        <Link onClick={handleMenuClose} to="/" style={{ textDecoration: 'none' }}>
           Home
         </Link>
       </MenuItem>
       <MenuItem>
-        <Link
-          onClick={handleMenuClose}
-          to="/products"
-          style={{ textDecoration: "none" }}
-        >
+        <Link onClick={handleMenuClose} to="/products" style={{ textDecoration: 'none' }}>
           Products
         </Link>
       </MenuItem>
       <MenuItem>
-        <Link
-          onClick={handleMenuClose}
-          to="/cartcontainer"
-          style={{ textDecoration: "none" }}
-        >
+        <Link onClick={handleMenuClose} to="/cartcontainer" style={{ textDecoration: 'none' }}>
           Cart
         </Link>
       </MenuItem>
       <MenuItem>
-        <Link
-          onClick={handleMenuClose}
-          to="/checkout"
-          style={{ textDecoration: "none" }}
-        >
+        <Link onClick={handleMenuClose} to="/checkout" style={{ textDecoration: 'none' }}>
           Check Out
         </Link>
       </MenuItem>
     </Menu>
   );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
+  const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
@@ -141,7 +125,7 @@ export default function PrimarySearchAppBar() {
           m={8}
           onClick={handleMenuClose}
           to="/"
-          style={{ textDecoration: "none", color: "black" }}
+          style={{ textDecoration: 'none', color: 'black' }}
         >
           Home
         </Link>
@@ -150,7 +134,7 @@ export default function PrimarySearchAppBar() {
         <Link
           onClick={handleMenuClose}
           to="/products"
-          style={{ textDecoration: "none", color: "black" }}
+          style={{ textDecoration: 'none', color: 'black' }}
         >
           Products
         </Link>
@@ -160,7 +144,7 @@ export default function PrimarySearchAppBar() {
         <Link
           onClick={handleMenuClose}
           to="/checkout"
-          style={{ textDecoration: "none", color: "black" }}
+          style={{ textDecoration: 'none', color: 'black' }}
         >
           Check Out
         </Link>
@@ -169,13 +153,9 @@ export default function PrimarySearchAppBar() {
         <Link
           onClick={handleMenuClose}
           to="/cartcontainer"
-          style={{ textDecoration: "none", color: "black" }}
+          style={{ textDecoration: 'none', color: 'black' }}
         >
-          <IconButton
-            size="large"
-            aria-label="show 13 new items"
-            color="inherit"
-          ></IconButton>
+          <IconButton size="large" aria-label="show 13 new items" color="inherit"></IconButton>
           <Badge badgeContent={13} color="error">
             <ShoppingCartOutlinedIcon />
           </Badge>
@@ -194,21 +174,17 @@ export default function PrimarySearchAppBar() {
             <ComboBox />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {categoryArray.map(({ category, id }) => (
               <Button
                 key={id}
                 // onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
+                sx={{ my: 2, color: 'black', display: 'block' }}
               >
                 {category}
               </Button>
             ))}
-            <IconButton
-              size="large"
-              aria-label="show 4 new items"
-              color="inherit"
-            >
+            <IconButton size="large" aria-label="show 4 new items" color="inherit">
               <Badge badgeContent={13} color="error">
                 <ShoppingCartOutlinedIcon />
               </Badge>
@@ -225,7 +201,7 @@ export default function PrimarySearchAppBar() {
               <AccountCircle />
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="show more"
@@ -243,4 +219,6 @@ export default function PrimarySearchAppBar() {
       {renderMenu}
     </Box>
   );
-}
+};
+
+export default Navbar;
