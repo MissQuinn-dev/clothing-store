@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -14,6 +13,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import ShoppingCartCheckoutOutlinedIcon from '@mui/icons-material/ShoppingCartCheckoutOutlined';
+
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -27,6 +32,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export const NavDrawer = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -63,19 +69,35 @@ export const NavDrawer = () => {
       >
         <DrawerHeader>
           <IconButton onClick={toggleDrawer}>
-            {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronLeftIcon />}
+            <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => navigate('/')}>
+              <ListItemIcon>{<HomeOutlinedIcon />}</ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => navigate('/products')}>
+              <ListItemIcon>{<CategoryOutlinedIcon />}</ListItemIcon>
+              <ListItemText primary="Products" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => navigate('/cart')}>
+              <ListItemIcon>{<ShoppingCartOutlinedIcon />}</ListItemIcon>
+              <ListItemText primary="Cart (Broken!)" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => navigate('/checkout')}>
+              <ListItemIcon>{<ShoppingCartCheckoutOutlinedIcon />}</ListItemIcon>
+              <ListItemText primary="Checkout" />
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider />
         <List>
