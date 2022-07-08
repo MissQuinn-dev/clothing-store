@@ -1,8 +1,8 @@
-import React from "react";
-import Loading from "../components/Loading";
-import ProductCategory from "../components/products/ProductCategory";
-import Carousel from "react-material-ui-carousel";
-import { useGlobalContext } from "../context";
+import React from 'react';
+import Loading from '../components/Loading';
+import ProductCategory from '../components/products/ProductCategory';
+import Carousel from 'react-material-ui-carousel';
+import { useGlobalContext } from '../context';
 
 const Home = () => {
   const { products, loading, categoryArray } = useGlobalContext();
@@ -16,7 +16,7 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <Carousel>
+      <Carousel styles={{ zIndex: 1100 }}>
         {categoryArray.map((categoryArray, id) => {
           return <ProductCategory key={id} {...categoryArray} />;
         })}

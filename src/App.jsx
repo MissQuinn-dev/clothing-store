@@ -1,14 +1,14 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Container from "@mui/material/Container";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Error from "./pages/Error";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Container from '@mui/material/Container';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Error from './pages/Error';
 
-import Products from "./pages/Products";
-import CheckOut from "./components/cart/CheckOut";
-import CartContainer from "./components/cart/CartContainer";
-import Product from "./pages/Product";
+import Products from './pages/Products';
+import CheckOut from './components/cart/CheckOut';
+import CartContainer from './components/cart/CartContainer';
+import Product from './pages/Product';
 const App = () => {
   return (
     <Router>
