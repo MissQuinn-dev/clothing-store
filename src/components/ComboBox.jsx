@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import { useGlobalContext } from "../context";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { useGlobalContext } from '../context';
 
 const ComboBox = () => {
   const [searchTerms, setSearchTerms] = useState([]);
@@ -29,9 +29,7 @@ const ComboBox = () => {
       options={searchTerms}
       style={{ width: 300 }}
       onChange={(e, value) => navigate(`product/${value.id}`)}
-      renderInput={(params) => (
-        <TextField {...params} label="Search...." variant="outlined" />
-      )}
+      renderInput={(params) => <TextField {...params} label="Search...." variant="outlined" />}
     />
   );
 };

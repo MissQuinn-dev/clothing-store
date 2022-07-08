@@ -1,5 +1,5 @@
-import React from "react";
-import Button from "@mui/material/Button";
+import React from 'react';
+import Button from '@mui/material/Button';
 
 const FilterCategories = ({ pages }) => {
   return (
@@ -8,7 +8,7 @@ const FilterCategories = ({ pages }) => {
         <Button
           key={page}
           // onClick={handleCloseNavMenu}
-          sx={{ my: 2, color: "white", display: "block" }}
+          sx={{ my: 2, color: 'white', display: 'block' }}
         >
           {page}
         </Button>

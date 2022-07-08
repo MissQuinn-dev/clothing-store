@@ -1,10 +1,10 @@
-import React from "react";
-import Loading from "../components/Loading";
-import ProductItem from "../components/products/ProductItem";
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-import { useGlobalContext } from "../context";
+import React from 'react';
+import Loading from '../components/Loading';
+import ProductItem from '../components/products/ProductItem';
+import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+import { useGlobalContext } from '../context';
 
 const Products = () => {
   const { products, loading } = useGlobalContext();

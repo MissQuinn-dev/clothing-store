@@ -1,25 +1,25 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { AppProvider } from "./context";
-import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { AppProvider } from './context';
+import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 const theme = createTheme({
   components: {
     MuiAppBar: {
       styleOverrides: {
         colorInherit: {
-          backgroundColor: "#FFD7EA",
+          backgroundColor: '#FFD7EA',
         },
       },
       defaultProps: {
-        color: "inherit",
+        color: 'inherit',
       },
     },
   },
 });
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AppProvider>
@@ -27,7 +27,7 @@ root.render(
         <App />
       </ThemeProvider>
     </AppProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
