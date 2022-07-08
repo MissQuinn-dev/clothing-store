@@ -1,16 +1,12 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepButton from "@mui/material/StepButton";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepButton from '@mui/material/StepButton';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
-const steps = [
-  "Check cart Items",
-  "Address and payment info",
-  "Checkout Complete",
-];
+const steps = ['Check cart Items', 'Address and payment info', 'Checkout Complete'];
 
 export default function CheckOut() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -63,7 +59,7 @@ export default function CheckOut() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: '100%' }}>
       <Stepper nonLinear activeStep={activeStep} style={{ marginTop: 100 }}>
         {steps.map((label, index) => (
           <Step key={label} completed={completed[index]}>
@@ -79,15 +75,15 @@ export default function CheckOut() {
             <Typography sx={{ mt: 2, mb: 1 }}>
               All steps completed - you&apos;re finished
             </Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Box sx={{ flex: "1 1 auto" }} />
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+              <Box sx={{ flex: '1 1 auto' }} />
               <Button onClick={handleReset}>Reset</Button>
             </Box>
           </React.Fragment>
         ) : (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
                 color="inherit"
                 disabled={activeStep === 0}
@@ -96,23 +92,18 @@ export default function CheckOut() {
               >
                 Back
               </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
+              <Box sx={{ flex: '1 1 auto' }} />
               <Button onClick={handleNext} sx={{ mr: 1 }}>
                 Next
               </Button>
               {activeStep !== steps.length &&
                 (completed[activeStep] ? (
-                  <Typography
-                    variant="caption"
-                    sx={{ display: "inline-block" }}
-                  >
+                  <Typography variant="caption" sx={{ display: 'inline-block' }}>
                     Step {activeStep + 1} already completed
                   </Typography>
                 ) : (
                   <Button onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1
-                      ? "Finish"
-                      : "Submit this Step"}
+                    {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Submit this Step'}
                   </Button>
                 ))}
             </Box>

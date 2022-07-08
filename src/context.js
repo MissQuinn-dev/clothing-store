@@ -1,10 +1,10 @@
-import React, { useState, useContext, useReducer, useEffect } from "react";
-import reducer from "./reducer";
-import cartItems from "./data";
-import { useCallback } from "react";
+import React, { useState, useContext, useReducer, useEffect } from 'react';
+import reducer from './reducer';
+import cartItems from './data';
+import { useCallback } from 'react';
 // IMport loading whereever the heck it goes maby here
 
-const url = "http://localhost:4000/products";
+const url = 'http://localhost:4000/products';
 const AppContext = React.createContext();
 
 const initialState = {
@@ -17,7 +17,7 @@ const initialState = {
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState([]);
 
   const fetchProduct = useCallback(async () => {
@@ -39,39 +39,37 @@ const AppProvider = ({ children }) => {
   }, [searchTerm, fetchProduct]);
 
   const clearCart = () => {
-    dispatch({ type: "CLEAR_CART" });
+    dispatch({ type: 'CLEAR_CART' });
   };
   const remove = (id) => {
-    dispatch({ type: "REMOVE", payload: id });
+    dispatch({ type: 'REMOVE', payload: id });
   };
   const increase = (id) => {
-    dispatch({ type: "INCREASE", payload: id });
+    dispatch({ type: 'INCREASE', payload: id });
   };
   const decrease = (id) => {
-    dispatch({ type: "DECREASE", payload: id });
+    dispatch({ type: 'DECREASE', payload: id });
   };
   const fetchData = async () => {
-    dispatch({ type: "LOADING" });
+    dispatch({ type: 'LOADING' });
     const response = await fetch(url);
     const cart = await response.json();
-    dispatch({ type: "DISPLAY_ITEMS", payload: cart });
+    dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
   };
   const toggleAmount = (id, type) => {
-    dispatch({ type: "TOGGLE_AMOUNT", payload: { id, type } });
+    dispatch({ type: 'TOGGLE_AMOUNT', payload: { id, type } });
   };
   useEffect(() => {
     fetchData();
   }, []);
 
   useEffect(() => {
-    dispatch({ type: "GET_TOTALS" });
+    dispatch({ type: 'GET_TOTALS' });
   }, [state.cart]);
 
-  const categoryKey = "category";
+  const categoryKey = 'category';
 
-  const categoryArray = [
-    ...new Map(products.map((item) => [item[categoryKey], item])).values(),
-  ];
+  const categoryArray = [...new Map(products.map((item) => [item[categoryKey], item])).values()];
 
   return (
     <AppContext.Provider

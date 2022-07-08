@@ -1,7 +1,7 @@
-import React from "react";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import { useGlobalContext } from "../../context";
+import React from 'react';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { useGlobalContext } from '../../context';
 //cannot distructure id of tiem
 const CartItem = ({ item, addToCart }) => {
   const { remove } = useGlobalContext();
@@ -18,12 +18,7 @@ const CartItem = ({ item, addToCart }) => {
             <p>Price: ${price}</p>
           </div>
           <div className="buttons">
-            <Button
-              size="small"
-              disableElevation
-              variant="contained"
-              onClick={() => remove(id)}
-            >
+            <Button size="small" disableElevation variant="contained" onClick={() => remove(id)}>
               -
             </Button>
             <p>{amount}</p>

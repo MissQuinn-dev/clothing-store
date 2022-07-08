@@ -1,13 +1,13 @@
-import React from "react";
-import CartItem from "./CartItem";
-import { useGlobalContext } from "../../context";
-import Box from "@mui/material/Box";
+import React from 'react';
+import CartItem from './CartItem';
+import { useGlobalContext } from '../../context';
+import Box from '@mui/material/Box';
 
 const CartContainer = () => {
   const { cart, total, clearCart } = useGlobalContext();
   if (cart.length === 0) {
     return (
-      <Box sx={{ width: "100%" }} style={{ marginTop: 100 }}>
+      <Box sx={{ width: '100%' }} style={{ marginTop: 100 }}>
         <section style={{ marginTop: 100 }}>
           <header>
             <h2>your bag</h2>
@@ -18,7 +18,7 @@ const CartContainer = () => {
     );
   }
   return (
-    <Box sx={{ width: "100%" }} style={{ marginTop: 100 }}>
+    <Box sx={{ width: '100%' }} style={{ marginTop: 100 }}>
       <section>
         <header>
           <h2>your bag</h2>
