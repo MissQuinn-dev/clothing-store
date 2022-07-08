@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const useApi = (token) => {
+export const useApi = (token) => {
   const defaultOptions = {
     baseURL: `${process.env.REACT_APP_API_URL}/`,
   };
@@ -13,5 +13,3 @@ const useApi = (token) => {
     delete: (url, options = {}) => axios.delete(url, { ...defaultOptions, ...options }),
   };
 };
-
-export default useApi;

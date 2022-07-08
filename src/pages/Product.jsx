@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -10,14 +9,16 @@ import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Card, CardMedia } from '@mui/material';
-
+import { useApi } from '../hooks/useApi';
 const Product = () => {
   const [product, setProduct] = useState('');
   const { id } = useParams();
+  const request = useApi();
   const getProduct = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/products/${id}`);
-      setProduct(await response.json());
+      // const response = await fetch(`http://localhost:4000/products/${id}`);
+      const response = await request.get(`products/${id}`);
+      setProduct(response.data);
     } catch (error) {
       console.log(error);
     }
