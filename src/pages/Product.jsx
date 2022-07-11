@@ -9,8 +9,14 @@ import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Card, CardMedia } from '@mui/material';
+import Button from '@mui/material/Button';
+
 import { useApi } from '../hooks/useApi';
+import { useGlobalContext } from '../context';
+
 const Product = () => {
+  const { fetchData, cart, cartId } = useGlobalContext();
+
   const [product, setProduct] = useState('');
   const { id } = useParams();
   const request = useApi();
@@ -26,7 +32,18 @@ const Product = () => {
   useEffect(() => {
     getProduct();
   }, [id]);
-  console.log(product);
+
+  const addToCart = async () => {
+    try {
+      await request.patch(`carts/${cartId}`, {
+        products: [...cart, product],
+      });
+      return await fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(cart);
   return (
     <React.Fragment>
       <Grid container alignItems="stretch" justifyContent="space-around">
@@ -65,6 +82,9 @@ const Product = () => {
                   emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
                 />
               </Box>
+              <Button variant="contained" color="secondary" onClick={() => addToCart()}>
+                Check Out
+              </Button>
             </Box>
           </Container>
         </Grid>

@@ -15,10 +15,10 @@ const initialState = {
 
 const AppProvider = ({ children }) => {
   const request = useApi();
+  const [cartId, setCartId] = useState('8239158e-70b3-4f55-8ed4-e640c390983e');
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [products, setProducts] = useState([]);
-
   const fetchProduct = useCallback(async () => {
     setLoading(true);
     try {
@@ -68,7 +68,7 @@ const AppProvider = ({ children }) => {
   }, [state.cart]);
 
   const categoryKey = 'category';
-
+  let cart = [];
   const categoryArray = [...new Map(products.map((item) => [item[categoryKey], item])).values()];
 
   return (
@@ -81,10 +81,12 @@ const AppProvider = ({ children }) => {
         decrease,
         toggleAmount,
         loading,
-        // cartItems,
+        cart,
         setProducts,
         products,
         categoryArray,
+        fetchData,
+        cartId,
       }}
     >
       {children}
