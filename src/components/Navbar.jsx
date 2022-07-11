@@ -29,7 +29,7 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const { categoryArray } = useGlobalContext();
+  const { categoryArray, cart } = useGlobalContext();
 
   return (
     <Box sx={{ flexGrow: 1 }} position="sticky" style={{ marginTop: 100 }}>
@@ -47,8 +47,8 @@ const Navbar = () => {
                 {category}
               </Button>
             ))}
-            <IconButton size="large" aria-label="show 13 new items" color="inherit">
-              <Badge badgeContent={13} color="error">
+            <IconButton size="large" aria-label="shows the amount in the cart" color="inherit">
+              <Badge badgeContent={cart.length} color="error">
                 <ShoppingCartOutlinedIcon />
               </Badge>
             </IconButton>

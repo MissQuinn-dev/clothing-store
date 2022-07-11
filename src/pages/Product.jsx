@@ -84,7 +84,7 @@ const Product = () => {
                 />
               </Box>
               <Button variant="contained" color="secondary" onClick={() => addToCart()}>
-                Check Out
+                Add to cart
               </Button>
             </Box>
           </Container>
