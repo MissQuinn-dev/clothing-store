@@ -33,6 +33,7 @@ const AppProvider = ({ children }) => {
       setLoading(false);
     }
   }, []);
+
   useEffect(() => {
     fetchProduct();
   }, [fetchProduct]);
@@ -40,15 +41,19 @@ const AppProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
   };
+
   const remove = (id) => {
     dispatch({ type: 'REMOVE', payload: id });
   };
+
   const increase = (id) => {
     dispatch({ type: 'INCREASE', payload: id });
   };
+
   const decrease = (id) => {
     dispatch({ type: 'DECREASE', payload: id });
   };
+
   const fetchData = async () => {
     dispatch({ type: 'LOADING' });
     //8239158e-70b3-4f55-8ed4-e640c390983e test cart
@@ -56,9 +61,11 @@ const AppProvider = ({ children }) => {
     const cart = await response.data.products;
     dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
   };
+
   const toggleAmount = (id, type) => {
     dispatch({ type: 'TOGGLE_AMOUNT', payload: { id, type } });
   };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -68,7 +75,6 @@ const AppProvider = ({ children }) => {
   }, [state.cart]);
 
   const categoryKey = 'category';
-  let cart = [];
   const categoryArray = [...new Map(products.map((item) => [item[categoryKey], item])).values()];
 
   return (
@@ -81,7 +87,6 @@ const AppProvider = ({ children }) => {
         decrease,
         toggleAmount,
         loading,
-        cart,
         setProducts,
         products,
         categoryArray,
@@ -90,7 +95,7 @@ const AppProvider = ({ children }) => {
       }}
     >
       {children}
-    </AppContext.Provider>
+    </AppContext.Provider >
   );
 };
 export const useGlobalContext = () => {

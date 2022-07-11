@@ -16,6 +16,7 @@ import { useGlobalContext } from '../context';
 
 const Product = () => {
   const { fetchData, cart, cartId } = useGlobalContext();
+  console.log(cart);
 
   const [product, setProduct] = useState('');
   const { id } = useParams();
@@ -43,7 +44,7 @@ const Product = () => {
       console.log(error);
     }
   };
-  console.log(cart);
+
   return (
     <React.Fragment>
       <Grid container alignItems="stretch" justifyContent="space-around">
