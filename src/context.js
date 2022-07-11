@@ -1,30 +1,29 @@
 import React, { useState, useContext, useReducer, useEffect } from 'react';
 import reducer from './reducer';
-import cartItems from './data';
 import { useCallback } from 'react';
+import { useApi } from './hooks/useApi';
 // IMport loading whereever the heck it goes maby here
 
-const url = 'http://localhost:4000/products';
 const AppContext = React.createContext();
 
 const initialState = {
   loading: false,
-  cart: cartItems,
+  cart: [],
   total: 0,
   amount: 0,
 };
 
 const AppProvider = ({ children }) => {
+  const request = useApi();
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState([]);
 
   const fetchProduct = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${url}/${searchTerm}`);
-      const data = await response.json();
+      const response = await request.get('products');
+      const data = await response.data;
       if (data) {
         setProducts(data);
         setLoading(false);
@@ -33,10 +32,10 @@ const AppProvider = ({ children }) => {
       console.log(error);
       setLoading(false);
     }
-  }, [searchTerm]);
+  }, []);
   useEffect(() => {
     fetchProduct();
-  }, [searchTerm, fetchProduct]);
+  }, [fetchProduct]);
 
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
@@ -52,8 +51,9 @@ const AppProvider = ({ children }) => {
   };
   const fetchData = async () => {
     dispatch({ type: 'LOADING' });
-    const response = await fetch(url);
-    const cart = await response.json();
+    //8239158e-70b3-4f55-8ed4-e640c390983e test cart
+    const response = await request.get('carts/8239158e-70b3-4f55-8ed4-e640c390983e');
+    const cart = await response.data.products;
     dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
   };
   const toggleAmount = (id, type) => {
@@ -81,9 +81,7 @@ const AppProvider = ({ children }) => {
         decrease,
         toggleAmount,
         loading,
-        cartItems,
-        searchTerm,
-        setSearchTerm,
+        // cartItems,
         setProducts,
         products,
         categoryArray,
