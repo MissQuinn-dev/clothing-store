@@ -95,7 +95,7 @@ const AppProvider = ({ children }) => {
       }}
     >
       {children}
-    </AppContext.Provider >
+    </AppContext.Provider>
   );
 };
 export const useGlobalContext = () => {
