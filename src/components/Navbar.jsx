@@ -10,6 +10,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Button from '@mui/material/Button';
 import ComboBox from './ComboBox';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context';
 
 const Search = styled('div')(({ theme }) => ({
@@ -29,6 +30,7 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { categoryArray, cart } = useGlobalContext();
 
   return (
@@ -47,7 +49,12 @@ const Navbar = () => {
                 {category}
               </Button>
             ))}
-            <IconButton size="large" aria-label="shows the amount in the cart" color="inherit">
+            <IconButton
+              onClick={() => navigate('/cart')}
+              size="large"
+              aria-label="shows the amount in the cart"
+              color="inherit"
+            >
               <Badge badgeContent={cart.length} color="error">
                 <ShoppingCartOutlinedIcon />
               </Badge>

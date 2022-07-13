@@ -5,7 +5,6 @@ import Grid from '@mui/material/Box';
 import { Card } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
 import { styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
 

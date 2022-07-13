@@ -7,7 +7,7 @@ import Error from './pages/Error';
 
 import Products from './pages/Products';
 import CheckOut from './components/cart/CheckOut';
-import CartContainer from './components/cart/CartContainer';
+import Cart from './pages/Cart';
 import Product from './pages/Product';
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
           <Route path="/products" element={<Products />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/checkout" element={<CheckOut />} />
-          <Route path="/cart" element={<CartContainer />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </Container>

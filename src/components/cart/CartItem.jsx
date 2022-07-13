@@ -1,41 +1,30 @@
 import React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import { useGlobalContext } from '../../context';
-//cannot distructure id of tiem
-const CartItem = ({ item, addToCart }) => {
-  const { remove } = useGlobalContext();
-  //need to pull in global context stuff {increase, decrease, toggleAmount}
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
-  const { id, title, price, amount, image } = item;
-
+const CartItem = ({ id, title, price, image, category, description }) => {
   return (
-    <Box sx={{ flexGrow: 1 }} position="sticky" style={{ marginTop: 100 }}>
-      <div>
-        <div>
-          <h3>{title}</h3>
-          <div className="information">
-            <p>Price: ${price}</p>
-          </div>
-          <div className="buttons">
-            <Button size="small" disableElevation variant="contained" onClick={() => remove(id)}>
-              -
-            </Button>
-            <p>{amount}</p>
-            <Button
-              size="small"
-              disableElevation
-              variant="contained"
-              onClick={() => addToCart(item)}
-            >
-              +
-            </Button>
-          </div>
-        </div>
-        <img src={image} alt={title} />
-      </div>
-    </Box>
+    <Grid item xs={3}>
+      <Card style={{ maxWidth: '100%' }}>
+        <CardMedia component="img" alt={title} image={image} style={{ height: 100 }} />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {title}${price}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {description}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">{category}</Button>
+        </CardActions>
+      </Card>
+    </Grid>
   );
 };
-
 export default CartItem;
