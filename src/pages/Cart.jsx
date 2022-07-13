@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import CartItem from './CartItem';
+import CartItem from '../components/cart/CartItem';
 import Grid from '@mui/material/Grid';
 
-import { useGlobalContext } from '../../context';
-const CartContainer = () => {
+import { useGlobalContext } from '../context';
+const Cart = () => {
   const { cart } = useGlobalContext();
 
   if (cart.length === 0) {
@@ -37,8 +37,8 @@ const CartContainer = () => {
   return (
     <React.Fragment>
       <Grid container spacing={4} justifyContent="center" alignItems="stretch">
-        {cart.map((cart, id) => {
-          return <CartItem key={id} {...cart} />;
+        {cart.map((cartObject, id) => {
+          return <CartItem key={id} {...cartObject} />;
         })}
       </Grid>
       <Button variant="contained" color="secondary" onClick={() => console.log(...cart)}>
@@ -47,4 +47,4 @@ const CartContainer = () => {
     </React.Fragment>
   );
 };
-export default CartContainer;
+export default Cart;
