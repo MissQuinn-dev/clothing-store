@@ -21,7 +21,13 @@ const Products = () => {
         Products
       </Typography>
       <Divider variant="middle" style={{ marginBottom: 48 }} />
-      <Grid container spacing={4} justifyContent="center" alignItems="stretch">
+      <Grid
+        container
+        spacing={4}
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+      >
         {products.map((product, id) => {
           return <ProductItem key={id} {...product} />;
         })}

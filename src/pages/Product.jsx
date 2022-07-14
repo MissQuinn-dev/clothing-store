@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -10,6 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Card, CardMedia } from '@mui/material';
 import Button from '@mui/material/Button';
+import CardContent from '@mui/material/CardContent';
 
 import { useApi } from '../hooks/useApi';
 import { useGlobalContext } from '../context';
@@ -30,8 +29,10 @@ const Product = () => {
       console.log(error);
     }
   };
+  //Call back ticket!!!
   useEffect(() => {
     getProduct();
+    // eslint-disable-next-line
   }, [id]);
 
   const addToCart = async () => {
@@ -47,33 +48,34 @@ const Product = () => {
 
   return (
     <React.Fragment>
-      <Grid container alignItems="stretch" justifyContent="space-around">
-        <Grid item xs={5} md={7}>
-          <Container maxWidth="md">
-            <Box sx={{ height: '50vh' }}>
-              <Card>
-                <CardMedia style={{ height: '100%', width: '100%' }}>
-                  <img
-                    style={{ minWidth: 400, margin: 'auto' }}
-                    src={product.image}
-                    alt={product.title}
-                  />
-                </CardMedia>
-              </Card>
-            </Box>
-          </Container>
+      <Grid container>
+        <Grid container item xs={12} lg={6}>
+          <Card>
+            <CardMedia>
+              <img
+                style={{ margin: 'auto', maxHeight: 550 }}
+                src={product.image}
+                alt={product.title}
+              />
+            </CardMedia>
+          </Card>
         </Grid>
-        <Grid item xs={7} md={5}>
-          <Container maxWidth="md">
-            <Box sx={{ bgcolor: '#FFD7EA', height: '50vh' }}>
-              <Typography variant="h5" gutterBottom component="div">
-                {product.title}
-              </Typography>
-              <Divider variant="middle" />
-              <Typography variant="h6" gutterBottom component="div">
-                {product.price}
-              </Typography>
-              <Box>
+
+        <Grid container item xs={12} lg={6} mt={1}>
+          <Grid item>
+            <Card style={{ height: 'inherit' }}>
+              <CardContent>
+                <Typography variant="h5" gutterBottom component="div">
+                  {product.title}
+                </Typography>
+                <Divider variant="middle" />
+                <Typography variant="h6" gutterBottom component="div">
+                  ${product.price}
+                  <Button variant="contained" color="secondary" onClick={() => addToCart()}>
+                    Add to cart
+                  </Button>
+                </Typography>
+
                 <Rating
                   name="customized-color"
                   defaultValue={2}
@@ -82,12 +84,9 @@ const Product = () => {
                   icon={<FavoriteIcon fontSize="inherit" color="error" />}
                   emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
                 />
-              </Box>
-              <Button variant="contained" color="secondary" onClick={() => addToCart()}>
-                Add to cart
-              </Button>
-            </Box>
-          </Container>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
       </Grid>
     </React.Fragment>
