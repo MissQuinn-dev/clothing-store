@@ -7,7 +7,6 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import Button from '@mui/material/Button';
 import ComboBox from './ComboBox';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
@@ -20,35 +19,30 @@ const Search = styled('div')(({ theme }) => ({
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.55),
   },
-  marginRight: theme.spacing(2),
+  marginRight: theme.spacing(1),
   marginLeft: 0,
   width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
+  [theme.breakpoints.up('xs')]: {
+    marginLeft: theme.spacing(1),
     width: 'auto',
   },
 }));
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { categoryArray, cart } = useGlobalContext();
+  const { cart } = useGlobalContext();
 
   return (
-    <Box sx={{ flexGrow: 1 }} position="sticky" style={{ marginTop: 100 }}>
+    <Box style={{ marginTop: 100 }}>
       <AppBar>
         <Toolbar>
           <NavDrawer />
-          <Typography variant="h5">BunNeed</Typography>
+          <Typography variant="h6">BunNeed</Typography>
           <Search>
             <ComboBox />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {categoryArray.map(({ category, id }) => (
-              <Button key={id} sx={{ my: 2, color: 'black', display: 'block' }}>
-                {category}
-              </Button>
-            ))}
+          <Box sx={{ display: { md: 'flex' } }}>
             <IconButton
               onClick={() => navigate('/cart')}
               size="large"

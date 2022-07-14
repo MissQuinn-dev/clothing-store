@@ -17,16 +17,16 @@ const ProductItem = ({ id }) => {
 
   const getProduct = async () => {
     try {
-      // const response = await fetch(`http://localhost:4000/products/${id}`);
       const response = await request.get(`products/${id}`);
       setProduct(response.data);
     } catch (error) {
       console.log(error);
     }
   };
-
+  //Call back ticket!!!
   useEffect(() => {
     getProduct();
+    // eslint-disable-next-line
   }, [id]);
 
   const addToCart = async () => {
@@ -41,14 +41,9 @@ const ProductItem = ({ id }) => {
   };
 
   return (
-    <Grid item xs={3}>
-      <Card style={{ maxWidth: 300 }}>
-        <CardMedia
-          component="img"
-          alt={product.title}
-          image={product.image}
-          style={{ height: 300 }}
-        />
+    <Grid container item xs={12} sm={6} md={4}>
+      <Card style={{ maxWidth: '100%' }}>
+        <CardMedia component="img" alt={product.title} image={product.image} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {product.title}${product.price}
