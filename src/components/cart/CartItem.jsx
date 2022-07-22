@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
@@ -12,8 +12,50 @@ import Typography from '@mui/material/Typography';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import Tooltip from '@mui/material/Tooltip';
+import { useApi } from '../../hooks/useApi';
+import { useGlobalContext } from '../../context';
 
 const CartItem = ({ id, title, price, image, category, description }) => {
+  const { cart, cartId, fetchData } = useGlobalContext();
+  const [product, setProduct] = useState('');
+  const request = useApi();
+
+  const getProduct = async () => {
+    try {
+      const response = await request.get(`products/${id}`);
+      setProduct(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProduct();
+    // eslint-disable-next-line
+  }, [id]);
+
+  const addToCart = async () => {
+    try {
+      await request.patch(`carts/${cartId}`, {
+        products: [...cart, product],
+      });
+      return await fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeFromCart = async () => {
+    try {
+      await request.patch(`carts/${cartId}`, {
+        products: [...cart, (product -= product)],
+      });
+      return await fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <React.Fragment>
       <List sx={{ width: '100%', maxWidth: '51%' }}>
@@ -40,7 +82,7 @@ const CartItem = ({ id, title, price, image, category, description }) => {
               <Grid item container xs justifyContent={'flex-end'}>
                 <ButtonGroup orientation="vertical" variant="string">
                   <Tooltip title="Add" placement="left">
-                    <IconButton onClick={() => console.log(`Added ${title} to the cart`)}>
+                    <IconButton onClick={() => addToCart()}>
                       <KeyboardArrowUpRoundedIcon />
                     </IconButton>
                   </Tooltip>
@@ -50,7 +92,7 @@ const CartItem = ({ id, title, price, image, category, description }) => {
                     </Button>
                   </Tooltip>
                   <Tooltip title="Remove Item" placement="left">
-                    <IconButton onClick={() => console.log(`Removed ${title} from the cart`)}>
+                    <IconButton onClick={() => removeFromCart()}>
                       <KeyboardArrowDownRoundedIcon />
                     </IconButton>
                   </Tooltip>
