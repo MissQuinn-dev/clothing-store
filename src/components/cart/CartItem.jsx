@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
@@ -45,10 +46,17 @@ const CartItem = ({ id, title, price, image, category, description }) => {
     }
   };
 
-  const removeFromCart = async () => {
+  const removeItemFromCart = (cart, product) => {
+    return _.remove(cart, function (item) {
+      return item.id === product.id;
+    });
+  };
+
+  const removeFromCart = async (cart, product) => {
     try {
+      let newCart = removeItemFromCart(cart, product);
       await request.patch(`carts/${cartId}`, {
-        products: [...cart, (product -= product)],
+        products: [...newCart],
       });
       return await fetchData();
     } catch (error) {
