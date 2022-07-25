@@ -46,17 +46,39 @@ const CartItem = ({ id, title, price, image, category, description }) => {
     }
   };
 
-  const removeItemFromCart = (cart, product) => {
+  const removeAllOfAnItemFromCart = (cart, product) => {
     return _.remove(cart, function (item) {
       return item.id === product.id;
     });
   };
 
-  const removeFromCart = async (cart, product) => {
+  //this is the clear cart function
+  const clearCart = async () => {
     try {
-      let newCart = removeItemFromCart(cart, product);
+      removeAllOfAnItemFromCart(cart, product);
       await request.patch(`carts/${cartId}`, {
-        products: [...newCart],
+        products: [...cart],
+      });
+      return await fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeItemFromCart = (cart, product) => {
+    //remove the first occurance of the product in the cart array
+    let thingToRemove = _.findIndex(cart, function (item) {
+      return item.id === product.id;
+    });
+    //returns the cart array without the product at index of thingToRemove
+    return _.pullAt(cart, thingToRemove);
+  };
+
+  const removeFromCart = async () => {
+    try {
+      removeItemFromCart(cart, product);
+      await request.patch(`carts/${cartId}`, {
+        products: [...cart],
       });
       return await fetchData();
     } catch (error) {
