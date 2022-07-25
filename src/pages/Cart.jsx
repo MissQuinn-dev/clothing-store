@@ -5,12 +5,22 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CartItem from '../components/cart/CartItem';
 import Grid from '@mui/material/Grid';
-
 import { useGlobalContext } from '../context';
+
 const Cart = () => {
   const { cart } = useGlobalContext();
+  const allCartItems = [...new Set(cart)];
+  const itemAmount = {};
 
-  if (cart.length === 0) {
+  allCartItems.forEach((product) => {
+    itemAmount[product.id] = (itemAmount[product.id] || 0) + 1;
+  });
+
+  let eachUniqueItem = allCartItems.filter(function ({ id }) {
+    return !this.has(id) && this.add(id);
+  }, new Set());
+
+  if (allCartItems.length === 0) {
     return (
       <React.Fragment>
         <Box textAlign="center" mt={3}>
@@ -37,11 +47,11 @@ const Cart = () => {
   return (
     <React.Fragment>
       <Grid container spacing={4} justifyContent="center" alignItems="stretch">
-        {cart.map((cartObject, id) => {
+        {eachUniqueItem.map((cartObject, id) => {
           return <CartItem key={id} {...cartObject} />;
         })}
       </Grid>
-      <Button variant="contained" color="secondary" onClick={() => console.log(...cart)}>
+      <Button variant="contained" color="secondary" onClick={() => console.log(itemAmount)}>
         Test
       </Button>
     </React.Fragment>

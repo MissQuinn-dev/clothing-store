@@ -2,7 +2,6 @@ import React from 'react';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Box';
-import { Card } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { styled } from '@mui/material/styles';
@@ -12,7 +11,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(pink[500]),
   backgroundColor: pink[500],
   '&:hover': {
-    backgroundColor: pink[700],
+    backgroundColor: pink[400],
   },
 }));
 
@@ -20,24 +19,22 @@ const ProductCategory = ({ category, image }) => {
   return (
     <React.Fragment>
       <Grid container style={{ minHeight: 400 }} direction="row">
-        <Card style={{ maxWidth: '100%' }}>
-          <CardContent>
-            <CardMedia component="img" alt={category} image={image} style={{ maxHeight: 400 }} />
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '10%',
-                right: '5%',
-              }}
-            >
-              <CardActions>
-                <ColorButton variant="contained" size="large" color="success">
-                  {category}
-                </ColorButton>
-              </CardActions>
-            </div>
-          </CardContent>
-        </Card>
+        <CardContent>
+          <CardMedia component="img" alt={category} image={image} style={{ maxHeight: 400 }} />
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '10%',
+              right: '5%',
+            }}
+          >
+            <CardActions>
+              <ColorButton variant="contained" size="large" color="success">
+                {category}
+              </ColorButton>
+            </CardActions>
+          </div>
+        </CardContent>
       </Grid>
     </React.Fragment>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -33,7 +33,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export const NavDrawer = () => {
   const navigate = useNavigate();
-  const theme = useTheme();
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = () => {
