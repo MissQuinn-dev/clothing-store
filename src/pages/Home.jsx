@@ -6,10 +6,8 @@ import { useGlobalContext } from '../context';
 
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 
 const Home = () => {
   const { products, loading, categoryArray } = useGlobalContext();
