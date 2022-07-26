@@ -15,6 +15,7 @@ import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownR
 import Tooltip from '@mui/material/Tooltip';
 import { useApi } from '../../hooks/useApi';
 import { useGlobalContext } from '../../context';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 const CartItem = ({ id, title, price, image, category, description }) => {
   const { cart, cartId, fetchData } = useGlobalContext();
@@ -105,11 +106,18 @@ const CartItem = ({ id, title, price, image, category, description }) => {
                 </Grid>
                 <Grid item container justifyContent={'center'}>
                   <Typography align="center" variant="body1">
-                    {description}
+                    {price}
                   </Typography>
                 </Grid>
               </Grid>
               <Grid item container xs justifyContent={'flex-end'}>
+                <Grid item container xs justifyContent={'flex-end'}>
+                  <Tooltip title="Remove Items" placement="left">
+                    <IconButton onClick={() => clearCart()}>
+                      <DeleteOutlinedIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
                 <ButtonGroup orientation="vertical" variant="string">
                   <Tooltip title="Add" placement="left">
                     <IconButton onClick={() => addToCart()}>
@@ -121,7 +129,7 @@ const CartItem = ({ id, title, price, image, category, description }) => {
                       {price}
                     </Button>
                   </Tooltip>
-                  <Tooltip title="Remove Item" placement="left">
+                  <Tooltip title="Remove One Item" placement="left">
                     <IconButton onClick={() => removeFromCart()}>
                       <KeyboardArrowDownRoundedIcon />
                     </IconButton>
