@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import AddToCartButton from '../components/Buttons/AddToCartButton';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -7,16 +8,11 @@ import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Card, CardMedia } from '@mui/material';
-import Button from '@mui/material/Button';
 import CardContent from '@mui/material/CardContent';
 
 import { useApi } from '../hooks/useApi';
-import { useGlobalContext } from '../context';
 
 const Product = () => {
-  const { fetchData, cart, cartId } = useGlobalContext();
-  console.log(cart);
-
   const [product, setProduct] = useState('');
   const { id } = useParams();
   const request = useApi();
@@ -34,17 +30,6 @@ const Product = () => {
     getProduct();
     // eslint-disable-next-line
   }, [id]);
-
-  const addToCart = async () => {
-    try {
-      await request.patch(`carts/${cartId}`, {
-        products: [...cart, product],
-      });
-      return await fetchData();
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <React.Fragment>
@@ -71,9 +56,7 @@ const Product = () => {
                 <Divider variant="middle" />
                 <Typography variant="h6" gutterBottom component="div">
                   ${product.price}
-                  <Button variant="contained" color="secondary" onClick={() => addToCart()}>
-                    Add to cart
-                  </Button>
+                  <AddToCartButton product={product} />
                 </Typography>
 
                 <Rating

@@ -54,7 +54,7 @@ const CartItem = ({ id, title, price, image, category, description }) => {
   };
 
   //this is the clear cart function
-  const clearCart = async () => {
+  const clearItemFromCart = async () => {
     try {
       removeAllOfAnItemFromCart(cart, product);
       await request.patch(`carts/${cartId}`, {
@@ -113,7 +113,7 @@ const CartItem = ({ id, title, price, image, category, description }) => {
               <Grid item container xs justifyContent={'flex-end'}>
                 <Grid item container xs justifyContent={'flex-end'}>
                   <Tooltip title="Remove Items" placement="left">
-                    <IconButton onClick={() => clearCart()}>
+                    <IconButton onClick={() => clearItemFromCart()}>
                       <DeleteOutlinedIcon />
                     </IconButton>
                   </Tooltip>
