@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AddToCart from '../Buttons/AddToCart';
+import AddToCartButton from '../Buttons/AddToCartButton';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -26,7 +26,6 @@ const ProductItem = ({ id }) => {
     getProduct();
     // eslint-disable-next-line
   }, [id]);
-  console.log(AddToCart);
   return (
     <Grid container item xs={12} sm={6} md={4}>
       <Card style={{ maxWidth: '100%' }}>
@@ -41,7 +40,7 @@ const ProductItem = ({ id }) => {
         </CardContent>
         <CardActions>
           <Button size="small">{product.category}</Button>
-          <AddToCart product={product} />
+          <AddToCartButton product={product} />
         </CardActions>
       </Card>
     </Grid>

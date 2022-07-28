@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useGlobalContext } from '../../context';
 import { useApi } from '../../hooks/useApi';
 
 import Button from '@mui/material/Button';
 
-const AddToCart = ({ product }) => {
+const AddToCartButton = ({ product }) => {
   const { cart, cartId, fetchData } = useGlobalContext();
   const request = useApi();
 
@@ -25,4 +25,4 @@ const AddToCart = ({ product }) => {
     </Button>
   );
 };
-export default AddToCart;
+export default AddToCartButton;

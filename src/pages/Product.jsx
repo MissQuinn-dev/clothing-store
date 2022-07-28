@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import AddToCart from '../components/Buttons/AddToCart';
+import AddToCartButton from '../components/Buttons/AddToCartButton';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -11,12 +11,8 @@ import { Card, CardMedia } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 
 import { useApi } from '../hooks/useApi';
-import { useGlobalContext } from '../context';
 
 const Product = () => {
-  const { cart } = useGlobalContext();
-  console.log(cart);
-
   const [product, setProduct] = useState('');
   const { id } = useParams();
   const request = useApi();
@@ -60,7 +56,7 @@ const Product = () => {
                 <Divider variant="middle" />
                 <Typography variant="h6" gutterBottom component="div">
                   ${product.price}
-                  <AddToCart product={product} />
+                  <AddToCartButton product={product} />
                 </Typography>
 
                 <Rating
