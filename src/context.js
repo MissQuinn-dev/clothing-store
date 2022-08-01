@@ -57,6 +57,7 @@ const AppProvider = ({ children }) => {
   const fetchData = async () => {
     dispatch({ type: 'LOADING' });
     //8239158e-70b3-4f55-8ed4-e640c390983e test cart
+    //cart for jays house e336e38d-8adf-4a64-ac62-89882dc49e19
     const response = await request.get('carts/8239158e-70b3-4f55-8ed4-e640c390983e');
     const cart = await response.data.products;
     dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
