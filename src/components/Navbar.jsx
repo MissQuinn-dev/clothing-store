@@ -44,7 +44,7 @@ const Navbar = () => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { md: 'flex' } }}>
-            <Button variant="outlined" onClick={() => navigate('/login')}>
+            <Button variant="text" onClick={() => navigate('/login')}>
               <Typography variant="h6">Login</Typography>
             </Button>
             <IconButton
