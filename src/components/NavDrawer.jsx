@@ -71,43 +71,29 @@ export const NavDrawer = () => {
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
-        <Divider />
         <List>
+          <Divider />
           <ListItem disablePadding>
             <ListItemButton onClick={() => navigate('/')}>
               <ListItemIcon>{<HomeOutlinedIcon />}</ListItemIcon>
               <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
+          <Divider />
           <ListItem disablePadding>
             <ListItemButton onClick={() => navigate('/products')}>
               <ListItemIcon>{<CategoryOutlinedIcon />}</ListItemIcon>
               <ListItemText primary="Products" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate('/cart')}>
-              <ListItemIcon>{<ShoppingCartOutlinedIcon />}</ListItemIcon>
-              <ListItemText primary="Cart (Broken!)" />
-            </ListItemButton>
-          </ListItem>
+          <Divider />
           <ListItem disablePadding>
             <ListItemButton onClick={() => navigate('/checkout')}>
               <ListItemIcon>{<ShoppingCartCheckoutOutlinedIcon />}</ListItemIcon>
               <ListItemText primary="Checkout" />
             </ListItemButton>
           </ListItem>
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          <Divider />
         </List>
       </Drawer>
     </Box>
