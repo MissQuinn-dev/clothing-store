@@ -13,6 +13,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import LoginIcon from '@mui/icons-material/Login';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -89,8 +90,22 @@ export const NavDrawer = () => {
           <Divider />
           <ListItem disablePadding>
             <ListItemButton onClick={() => navigate('/checkout')}>
+              <ListItemIcon>{<ShoppingCartOutlinedIcon />}</ListItemIcon>
+              <ListItemText primary="Cart" />
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => navigate('/checkout')}>
               <ListItemIcon>{<ShoppingCartCheckoutOutlinedIcon />}</ListItemIcon>
               <ListItemText primary="Checkout" />
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => navigate('/login')}>
+              <ListItemIcon>{<LoginIcon />}</ListItemIcon>
+              <ListItemText primary="Login" />
             </ListItemButton>
           </ListItem>
           <Divider />

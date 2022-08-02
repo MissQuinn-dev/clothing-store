@@ -7,6 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
+import LoginIcon from '@mui/icons-material/Login';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import ComboBox from './ComboBox';
 import Typography from '@mui/material/Typography';
@@ -43,8 +44,12 @@ const Navbar = () => {
             <ComboBox />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { md: 'flex' } }}>
-            <Button variant="text" onClick={() => navigate('/login')}>
+          <Box sx={{ display: { xs: 'flex' } }}>
+            <Button
+              variant="text"
+              sx={{ color: '#000', display: { xs: 'none', sm: 'block' } }}
+              onClick={() => navigate('/login')}
+            >
               <Typography variant="h6">Login</Typography>
             </Button>
             <IconButton
