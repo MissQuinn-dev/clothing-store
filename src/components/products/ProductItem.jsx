@@ -7,12 +7,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-
+import { useNavigate } from 'react-router-dom';
 import { useApi } from '../../hooks/useApi';
 
 const ProductItem = ({ id }) => {
   const [product, setProduct] = useState('');
   const request = useApi();
+  const navigate = useNavigate();
   const getProduct = async () => {
     try {
       const response = await request.get(`products/${id}`);
@@ -25,7 +26,7 @@ const ProductItem = ({ id }) => {
   useEffect(() => {
     getProduct();
     // eslint-disable-next-line
-  }, [id]);
+  }, []);
   return (
     <Grid container item xs={12} sm={6} md={4}>
       <Card style={{ maxWidth: '100%' }}>
@@ -39,7 +40,9 @@ const ProductItem = ({ id }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">{product.category}</Button>
+          <Button size="small" onClick={() => navigate(`category/${product.category}`)}>
+            {product.category}
+          </Button>
           <AddToCartButton product={product} />
         </CardActions>
       </Card>

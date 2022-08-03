@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Error from './pages/Error';
 import Login from './pages/Login';
 import Products from './pages/Products';
+import ProductsCategory from './components/products/ProductCategory';
 import CheckOut from './components/cart/CheckOut';
 import Cart from './pages/Cart';
 import Product from './pages/Product';
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/category/:category" element={<Products />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/checkout" element={<CheckOut />} />
           <Route path="/cart" element={<Cart />} />
