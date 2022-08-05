@@ -4,13 +4,16 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useApi } from '../hooks/useApi';
+import { useGlobalContext } from '../context';
+
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 const validate = (values) => {
   const errors = {};
   if (!values.password) {
     errors.password = 'Password Required';
-  } else if (values.password.length > 25) {
-    errors.password = 'Must be 25 characters or less';
+  } else if (values.password.length < 6) {
+    errors.password = 'Must be 6 characters or more';
   }
 
   if (!values.email) {
@@ -25,18 +28,34 @@ const validate = (values) => {
 const Login = () => {
   // Pass the useFormik() hook initial form values, a validate function that will be called when
   // form values change or fields are blurred, and a submit function that will
+  const request = useApi();
+  const { setUserInfo } = useGlobalContext();
+  const loginUser = async (values) => {
+    try {
+      const response = await request.post('users/login', {
+        ...values,
+      });
+      if (response.data) {
+        console.log('loged in successfully!');
+        setUserInfo({ ...response.data });
+      }
 
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const formik = useFormik({
     initialValues: {
-      password: '',
       email: '',
+      password: '',
     },
     validate,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      loginUser(values);
+      console.log(values);
     },
   });
-
   return (
     <form onSubmit={formik.handleSubmit}>
       <Typography variant="h6" gutterBottom component="div">

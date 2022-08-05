@@ -15,7 +15,7 @@ const initialState = {
 
 const AppProvider = ({ children }) => {
   const request = useApi();
-  const [cartId, setCartId] = useState('8239158e-70b3-4f55-8ed4-e640c390983e');
+  const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [products, setProducts] = useState([]);
@@ -32,6 +32,7 @@ const AppProvider = ({ children }) => {
       console.log(error);
       setLoading(false);
     }
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -56,11 +57,16 @@ const AppProvider = ({ children }) => {
 
   const fetchData = async () => {
     dispatch({ type: 'LOADING' });
+
     //8239158e-70b3-4f55-8ed4-e640c390983e test cart
     //cart for jays house e336e38d-8adf-4a64-ac62-89882dc49e19
-    const response = await request.get('carts/8239158e-70b3-4f55-8ed4-e640c390983e');
-    const cart = await response.data.products;
-    dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
+    // const response = await request.get(`carts/8239158e-70b3-4f55-8ed4-e640c390983e`);
+    if (userInfo.cartId) {
+      const response = await request.get(`carts/${userInfo.cartId}`);
+      const cart = await response.data.products;
+      dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
+      console.log(userInfo.cartId);
+    }
   };
 
   const toggleAmount = (id, type) => {
@@ -69,7 +75,8 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+    //eslint-disable-next-line
+  }, [userInfo]);
 
   useEffect(() => {
     dispatch({ type: 'GET_TOTALS' });
@@ -92,7 +99,8 @@ const AppProvider = ({ children }) => {
         products,
         categoryArray,
         fetchData,
-        cartId,
+        setUserInfo,
+        userInfo,
       }}
     >
       {children}

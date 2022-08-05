@@ -19,7 +19,7 @@ import { useGlobalContext } from '../../context';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 const CartItem = ({ id, title, price, image, category, description }) => {
-  const { cart, cartId, fetchData } = useGlobalContext();
+  const { cart, fetchData, userInfo } = useGlobalContext();
   const [product, setProduct] = useState([]);
   const request = useApi();
 
@@ -41,7 +41,7 @@ const CartItem = ({ id, title, price, image, category, description }) => {
 
   const addToCart = async () => {
     try {
-      await request.patch(`carts/${cartId}`, {
+      await request.patch(`carts/${userInfo.cartId}`, {
         products: [...cart, product],
       });
       return await fetchData();
@@ -60,7 +60,7 @@ const CartItem = ({ id, title, price, image, category, description }) => {
   const clearItemFromCart = async () => {
     try {
       removeAllOfAnItemFromCart(cart, product);
-      await request.patch(`carts/${cartId}`, {
+      await request.patch(`carts/${userInfo.cartId}`, {
         products: [...cart],
       });
       return await fetchData();
@@ -81,7 +81,7 @@ const CartItem = ({ id, title, price, image, category, description }) => {
   const removeFromCart = async () => {
     try {
       removeItemFromCart(cart, product);
-      await request.patch(`carts/${cartId}`, {
+      await request.patch(`carts/${userInfo.cartId}`, {
         products: [...cart],
       });
       return await fetchData();
