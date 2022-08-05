@@ -5,12 +5,12 @@ import { useApi } from '../../hooks/useApi';
 import Button from '@mui/material/Button';
 
 const AddToCartButton = ({ product }) => {
-  const { cart, cartId, fetchData } = useGlobalContext();
+  const { cart, userInfo, fetchData } = useGlobalContext();
   const request = useApi();
 
   const addToCart = async () => {
     try {
-      await request.patch(`carts/${cartId}`, {
+      await request.patch(`carts/${userInfo.cartId}`, {
         products: [...cart, product],
       });
       return await fetchData();
