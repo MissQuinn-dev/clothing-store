@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import { useApi } from '../hooks/useApi';
-import { useGlobalContext } from '../context';
 import { useNavigate } from 'react-router-dom';
 
 const validate = (values) => {
@@ -33,8 +32,6 @@ const validate = (values) => {
 const Register = () => {
   const navigate = useNavigate();
   const request = useApi();
-  const { userInfo } = useGlobalContext();
-  console.log(userInfo);
   const registerUser = async (values) => {
     try {
       const response = await request.post('users/register', {
@@ -54,6 +51,7 @@ const Register = () => {
     initialValues: {
       email: '',
       password: '',
+      password2: '',
     },
     validate,
     onSubmit: (values) => {
