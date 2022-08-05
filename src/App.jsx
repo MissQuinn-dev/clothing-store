@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Error from './pages/Error';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Products from './pages/Products';
 import CheckOut from './components/cart/CheckOut';
 import Cart from './pages/Cart';
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/category/:category" element={<Products />} />
           <Route path="/product/:id" element={<Product />} />

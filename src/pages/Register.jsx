@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useApi } from '../hooks/useApi';
-import { useGlobalContext } from '../context';
-
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
+import { useApi } from '../hooks/useApi';
+import { useNavigate } from 'react-router-dom';
+
 const validate = (values) => {
   const errors = {};
   if (!values.password) {
@@ -22,44 +22,47 @@ const validate = (values) => {
     errors.email = 'Invalid email address';
   }
 
+  if (values.password !== values.password2) {
+    errors.password2 = 'Passwords must match';
+  }
+
   return errors;
 };
 
-const Login = () => {
-  // Pass the useFormik() hook initial form values, a validate function that will be called when
-  // form values change or fields are blurred, and a submit function that will
+const Register = () => {
+  const navigate = useNavigate();
   const request = useApi();
-  const { setUserInfo } = useGlobalContext();
-  const loginUser = async (values) => {
+  const registerUser = async (values) => {
     try {
-      const response = await request.post('users/login', {
+      const response = await request.post('users/register', {
         ...values,
       });
       if (response.data) {
-        console.log('loged in successfully!');
-        setUserInfo({ ...response.data });
+        return navigate('/login');
       }
 
-      return response;
+      return;
     } catch (error) {
       console.log(error);
     }
   };
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
+      password2: '',
     },
     validate,
     onSubmit: (values) => {
-      loginUser(values);
+      registerUser(values);
       console.log(values);
     },
   });
   return (
     <form onSubmit={formik.handleSubmit}>
       <Typography variant="h3" gutterBottom component="div">
-        Log in
+        Register
       </Typography>
       <Typography variant="h6" gutterBottom component="div">
         E-mail
@@ -88,10 +91,20 @@ const Login = () => {
         />
         {formik.errors.password ? <div>{formik.errors.password}</div> : null}
       </Box>
+      <Box autoComplete="off">
+        <TextField
+          id="outlined-password-input2"
+          name="password2"
+          type="password"
+          onChange={formik.handleChange}
+          value={formik.values.password2}
+        />
+        {formik.errors.password2 ? <div>{formik.errors.password2}</div> : null}
+      </Box>
       <Button variant="contained" type="submit" endIcon={<ChevronRightOutlinedIcon />}>
         Submit
       </Button>
     </form>
   );
 };
-export default Login;
+export default Register;
