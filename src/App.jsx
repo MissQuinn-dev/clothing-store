@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import Error from './pages/Error';
 import Login from './pages/Login';
 import Products from './pages/Products';
-import ProductsCategory from './components/products/ProductCategory';
 import CheckOut from './components/cart/CheckOut';
 import Cart from './pages/Cart';
 import Product from './pages/Product';
