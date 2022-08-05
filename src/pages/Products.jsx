@@ -21,20 +21,17 @@ const Products = () => {
 
   const getProducts = async () => {
     try {
-      // const response = await fetch(`http://localhost:4000/products/${id}`);
       const response = await request.get(`products`);
       const products = response.data;
       if (!category) {
         setDisplayProducts(products);
       }
       setDisplayProducts(products.filter(matchCategory));
-      console.log(products);
     } catch (error) {
       console.log(error);
     }
   };
 
-  //Call back ticket!!!
   useEffect(() => {
     getProducts();
     // eslint-disable-next-line
