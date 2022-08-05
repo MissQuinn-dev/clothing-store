@@ -10,7 +10,7 @@ export default function Error() {
   return (
     <React.Fragment>
       <Box>
-        <Grid container direction="center" justifyContent="center" alignItems="center">
+        <Grid container direction="column" justifyContent="center" alignItems="center">
           <Card sx={{ maxWidth: 600 }}>
             <Box m={2}>
               <Typography align="center" gutterBottom variant="h4" component="div">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useCallback } from 'react';
 import AddToCartButton from '../components/Buttons/AddToCartButton';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -16,20 +17,20 @@ const Product = () => {
   const [product, setProduct] = useState('');
   const { id } = useParams();
   const request = useApi();
-  const getProduct = async () => {
+  const getProduct = useCallback(async () => {
     try {
-      // const response = await fetch(`http://localhost:4000/products/${id}`);
       const response = await request.get(`products/${id}`);
-      setProduct(response.data);
+      const data = await response.data;
+
+      setProduct(data);
     } catch (error) {
       console.log(error);
     }
-  };
-  //Call back ticket!!!
+  }, [id, request]);
+
   useEffect(() => {
     getProduct();
-    // eslint-disable-next-line
-  }, [id]);
+  }, [getProduct]);
 
   return (
     <React.Fragment>

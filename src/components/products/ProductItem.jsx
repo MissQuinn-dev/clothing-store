@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useCallback } from 'react';
 import AddToCartButton from '../Buttons/AddToCartButton';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -14,19 +15,21 @@ const ProductItem = ({ id }) => {
   const [product, setProduct] = useState('');
   const request = useApi();
   const navigate = useNavigate();
-  const getProduct = async () => {
+  const getProduct = useCallback(async () => {
     try {
       const response = await request.get(`products/${id}`);
-      setProduct(response.data);
+      const data = await response.data;
+      if (data) {
+        setProduct(data);
+      }
     } catch (error) {
       console.log(error);
     }
-  };
-  //Call back ticket!!!
+  }, [id, request]);
+
   useEffect(() => {
     getProduct();
-    // eslint-disable-next-line
-  }, []);
+  }, [getProduct]);
   return (
     <Grid container item xs={12} sm={6} md={4}>
       <Card style={{ maxWidth: '100%' }}>

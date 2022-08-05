@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
+import { useCallback } from 'react';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
@@ -19,22 +20,24 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 const CartItem = ({ id, title, price, image, category, description }) => {
   const { cart, cartId, fetchData } = useGlobalContext();
-  const [product, setProduct] = useState('');
+  const [product, setProduct] = useState([]);
   const request = useApi();
 
-  const getProduct = async () => {
+  const getProduct = useCallback(async () => {
     try {
       const response = await request.get(`products/${id}`);
-      setProduct(response.data);
+      const data = await response.data;
+      if (data) {
+        setProduct(data);
+      }
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id, request]);
 
   useEffect(() => {
     getProduct();
-    // eslint-disable-next-line
-  }, [id]);
+  }, [getProduct]);
 
   const addToCart = async () => {
     try {

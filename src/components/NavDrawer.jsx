@@ -87,7 +87,7 @@ export const NavDrawer = () => {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate('/checkout')}>
+            <ListItemButton onClick={() => navigate('/cart')}>
               <ListItemIcon>{<ShoppingCartOutlinedIcon />}</ListItemIcon>
               <ListItemText primary="Cart" />
             </ListItemButton>
