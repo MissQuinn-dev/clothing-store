@@ -32,7 +32,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export const NavDrawer = () => {
-  const { userInfo } = useGlobalContext();
+  const { userInfo, setUserInfo } = useGlobalContext();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -114,7 +114,12 @@ export const NavDrawer = () => {
                 </ListItem>
                 <Divider />
                 <ListItem disablePadding>
-                  <ListItemButton onClick={() => navigate('/login')}>
+                  <ListItemButton
+                    onClick={() => {
+                      setUserInfo({});
+                      navigate('/');
+                    }}
+                  >
                     <ListItemIcon>{<LoginIcon />}</ListItemIcon>
                     <ListItemText primary="Logout" />
                   </ListItemButton>
