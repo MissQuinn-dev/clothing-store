@@ -65,7 +65,6 @@ const AppProvider = ({ children }) => {
       const response = await request.get(`carts/${userInfo.cartId}`);
       const cart = await response.data.products;
       dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
-      console.log(userInfo.cartId);
     }
   };
 

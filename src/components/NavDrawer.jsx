@@ -16,6 +16,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import ShoppingCartCheckoutOutlinedIcon from '@mui/icons-material/ShoppingCartCheckoutOutlined';
+import { useGlobalContext } from '../context';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -31,6 +32,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export const NavDrawer = () => {
+  const { userInfo } = useGlobalContext();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -86,27 +88,41 @@ export const NavDrawer = () => {
             </ListItemButton>
           </ListItem>
           <Divider />
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate('/cart')}>
-              <ListItemIcon>{<ShoppingCartOutlinedIcon />}</ListItemIcon>
-              <ListItemText primary="Cart" />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate('/checkout')}>
-              <ListItemIcon>{<ShoppingCartCheckoutOutlinedIcon />}</ListItemIcon>
-              <ListItemText primary="Checkout" />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate('/login')}>
-              <ListItemIcon>{<LoginIcon />}</ListItemIcon>
-              <ListItemText primary="Login" />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
+
+          <div>
+            {!userInfo.userId ? (
+              <ListItem disablePadding>
+                <ListItemButton onClick={() => navigate('/login')}>
+                  <ListItemIcon>{<LoginIcon />}</ListItemIcon>
+                  <ListItemText primary="Login" />
+                </ListItemButton>
+              </ListItem>
+            ) : (
+              <React.Fragment>
+                <ListItem disablePadding>
+                  <ListItemButton onClick={() => navigate('/cart')}>
+                    <ListItemIcon>{<ShoppingCartOutlinedIcon />}</ListItemIcon>
+                    <ListItemText primary="Cart" />
+                  </ListItemButton>
+                </ListItem>
+                <Divider />
+                <ListItem disablePadding>
+                  <ListItemButton onClick={() => navigate('/checkout')}>
+                    <ListItemIcon>{<ShoppingCartCheckoutOutlinedIcon />}</ListItemIcon>
+                    <ListItemText primary="Checkout" />
+                  </ListItemButton>
+                </ListItem>
+                <Divider />
+                <ListItem disablePadding>
+                  <ListItemButton onClick={() => navigate('/login')}>
+                    <ListItemIcon>{<LoginIcon />}</ListItemIcon>
+                    <ListItemText primary="Logout" />
+                  </ListItemButton>
+                </ListItem>
+                <Divider />
+              </React.Fragment>
+            )}
+          </div>
         </List>
       </Drawer>
     </Box>

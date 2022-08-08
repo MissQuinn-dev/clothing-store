@@ -4,9 +4,9 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 import { useApi } from '../hooks/useApi';
 import { useGlobalContext } from '../context';
-
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 const validate = (values) => {
   const errors = {};
@@ -30,6 +30,7 @@ const Login = () => {
   // form values change or fields are blurred, and a submit function that will
   const request = useApi();
   const { setUserInfo } = useGlobalContext();
+  const navigate = useNavigate();
   const loginUser = async (values) => {
     try {
       const response = await request.post('users/login', {
@@ -38,6 +39,7 @@ const Login = () => {
       if (response.data) {
         console.log('loged in successfully!');
         setUserInfo({ ...response.data });
+        navigate('/');
       }
 
       return response;
@@ -53,7 +55,6 @@ const Login = () => {
     validate,
     onSubmit: (values) => {
       loginUser(values);
-      console.log(values);
     },
   });
   return (
