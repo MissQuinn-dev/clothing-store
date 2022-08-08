@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import AddToCartButton from '../Buttons/AddToCartButton';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -8,6 +8,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import ButtonBase from '@mui/material/ButtonBase';
+
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '../../hooks/useApi';
 
@@ -31,19 +33,33 @@ const ProductItem = ({ id }) => {
     getProduct();
   }, [getProduct]);
   return (
-    <Grid container item xs={12} sm={6} md={4}>
+    <Grid container direction="row" justifyContent="center" item sm={12} md={6} lg={4}>
       <Card style={{ maxWidth: '100%' }}>
-        <CardMedia component="img" alt={product.title} image={product.image} />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {product.title}${product.price}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {product.description}
-          </Typography>
-        </CardContent>
+        <ButtonBase onClick={() => navigate(`../product/${product.id}`, { replace: true })}>
+          <CardMedia component="img" alt={product.title} image={product.image} />
+        </ButtonBase>
+        <Grid container>
+          <CardContent>
+            <Link to={`../product/${product.id}`} style={{ textDecoration: 'none' }}>
+              <Typography gutterBottom variant="h5" component="div" color={'black'}>
+                {product.title}
+              </Typography>
+            </Link>
+            <Typography gutterBottom variant="h5" component="div">
+              ${product.price}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {product.description}
+            </Typography>
+          </CardContent>
+        </Grid>
+
         <CardActions>
-          <Button size="small" onClick={() => navigate(`category/${product.category}`)}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate(`category/${product.category}`)}
+          >
             {product.category}
           </Button>
           <AddToCartButton product={product} />
