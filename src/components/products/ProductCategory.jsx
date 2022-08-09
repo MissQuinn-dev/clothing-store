@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
-
+import { useNavigate } from 'react-router-dom';
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(pink[500]),
   backgroundColor: pink[500],
@@ -16,6 +16,8 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 const ProductCategory = ({ category, image }) => {
+  console.log(category);
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <Grid container style={{ minHeight: 400 }} direction="row">
@@ -29,7 +31,12 @@ const ProductCategory = ({ category, image }) => {
             }}
           >
             <CardActions>
-              <ColorButton variant="contained" size="large" color="success">
+              <ColorButton
+                onClick={() => navigate(`../products/category/${category}`, { replace: true })}
+                variant="contained"
+                size="large"
+                color="success"
+              >
                 {category}
               </ColorButton>
             </CardActions>
