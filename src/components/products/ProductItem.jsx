@@ -27,7 +27,8 @@ const ProductItem = ({ id }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [id, request]);
+    // eslint-disable-next-line
+  }, [id]);
 
   useEffect(() => {
     getProduct();
