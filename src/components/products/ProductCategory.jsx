@@ -16,7 +16,6 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 const ProductCategory = ({ category, image }) => {
-  console.log(category);
   const navigate = useNavigate();
   return (
     <React.Fragment>
