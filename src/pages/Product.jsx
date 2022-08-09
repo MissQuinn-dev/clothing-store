@@ -26,7 +26,8 @@ const Product = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [id, request]);
+    // eslint-disable-next-line
+  }, [id]);
 
   useEffect(() => {
     getProduct();
@@ -49,12 +50,15 @@ const Product = () => {
 
         <Grid container item xs={12} lg={6} mt={1}>
           <Grid item>
-            <Card style={{ height: 'inherit' }}>
+            <Card style={{ height: 'inherit', maxWidth: 550 }}>
               <CardContent>
                 <Typography variant="h5" gutterBottom component="div">
                   {product.title}
                 </Typography>
                 <Divider variant="middle" />
+                <Typography variant="body1" gutterBottom component="div">
+                  {product.description}
+                </Typography>
                 <Typography variant="h6" gutterBottom component="div">
                   ${product.price}
                   <AddToCartButton product={product} />
@@ -62,7 +66,7 @@ const Product = () => {
 
                 <Rating
                   name="customized-color"
-                  defaultValue={2}
+                  defaultValue={4.5}
                   getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
                   precision={0.5}
                   icon={<FavoriteIcon fontSize="inherit" color="error" />}
