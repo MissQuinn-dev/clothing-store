@@ -33,7 +33,8 @@ const CartItem = ({ id, title, price, image, category, description }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [id, request]);
+    // eslint-disable-next-line
+  }, [id]);
 
   useEffect(() => {
     getProduct();
