@@ -4,7 +4,8 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import { useNavigate, Link } from 'react-router-dom';
 import { useApi } from '../hooks/useApi';
 import { useGlobalContext } from '../context';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
@@ -58,41 +59,57 @@ const Login = () => {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <Typography variant="h3" gutterBottom component="div">
-        Log in
-      </Typography>
-      <Typography variant="h6" gutterBottom component="div">
-        E-mail
-      </Typography>
-      <Box autoComplete="off">
-        <TextField
-          id="email"
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
+    <Grid container direction="row" justifyContent="center" alignItems="center">
+      <form onSubmit={formik.handleSubmit}>
+        <Grid container direction="row" justifyContent="center" alignItems="center">
+          <Typography variant="h3" gutterBottom component="div">
+            Log in
+          </Typography>
+        </Grid>
+        <Typography variant="h6" gutterBottom component="div">
+          E-mail
+        </Typography>
+        <Box autoComplete="off">
+          <TextField
+            id="email"
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
 
-        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-      </Box>
-      <Typography variant="h6" gutterBottom component="div">
-        Password
-      </Typography>
-      <Box autoComplete="off">
-        <TextField
-          id="outlined-password-input"
-          name="password"
-          type="password"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-        />
-        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-      </Box>
-      <Button variant="contained" type="submit" endIcon={<ChevronRightOutlinedIcon />}>
-        Submit
-      </Button>
-    </form>
+          {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+        </Box>
+        <Typography variant="h6" gutterBottom component="div">
+          Password
+        </Typography>
+        <Box autoComplete="off" mb={1}>
+          <TextField
+            id="outlined-password-input"
+            name="password"
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+        </Box>
+        <Grid container direction="column" justifyContent="center" alignItems="flex-start">
+          <Grid item mr={1}>
+            <Link to="/register">Don't have an account? Sign Up Here!</Link>
+          </Grid>
+          <Grid>
+            <Button
+              variant="contained"
+              color="secondary"
+              type="submit"
+              endIcon={<ChevronRightOutlinedIcon />}
+            >
+              Log In
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </Grid>
   );
 };
 export default Login;

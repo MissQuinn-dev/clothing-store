@@ -17,11 +17,13 @@ import Tooltip from '@mui/material/Tooltip';
 import { useApi } from '../../hooks/useApi';
 import { useGlobalContext } from '../../context';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { moneyFormatter } from '../../utils/moneyFormatter';
 
-const CartItem = ({ id, title, price, image, category, description }) => {
+const CartItem = ({ id, title, price, image, amount }) => {
   const { cart, fetchData, userInfo } = useGlobalContext();
   const [product, setProduct] = useState([]);
   const request = useApi();
+  const itemTotalPrice = amount * price;
 
   const getProduct = useCallback(async () => {
     try {
@@ -105,12 +107,12 @@ const CartItem = ({ id, title, price, image, category, description }) => {
               <Grid item container xs justifyContent={'center'} direction="column">
                 <Grid item container justifyContent={'center'}>
                   <Typography variant="h5" align="center">
-                    {title}
+                    {title} x{amount}
                   </Typography>
                 </Grid>
                 <Grid item container justifyContent={'center'}>
                   <Typography align="center" variant="body1">
-                    {price}
+                    {moneyFormatter.format(price)}
                   </Typography>
                 </Grid>
               </Grid>
@@ -130,7 +132,7 @@ const CartItem = ({ id, title, price, image, category, description }) => {
                   </Tooltip>
                   <Tooltip title="Item Total" placement="left">
                     <Button disableRipple disableFocusRipple>
-                      {price}
+                      {moneyFormatter.format(itemTotalPrice)}
                     </Button>
                   </Tooltip>
                   <Tooltip title="Remove One Item" placement="left">

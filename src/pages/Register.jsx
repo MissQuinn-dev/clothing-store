@@ -3,10 +3,11 @@ import { useFormik } from 'formik';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import { useApi } from '../hooks/useApi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const validate = (values) => {
   const errors = {};
@@ -60,51 +61,67 @@ const Register = () => {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <Typography variant="h3" gutterBottom component="div">
-        Register
-      </Typography>
-      <Typography variant="h6" gutterBottom component="div">
-        E-mail
-      </Typography>
-      <Box autoComplete="off">
-        <TextField
-          id="email"
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
+    <Grid container direction="row" justifyContent="center" alignItems="center">
+      <form onSubmit={formik.handleSubmit}>
+        <Grid container direction="row" justifyContent="center" alignItems="center">
+          <Typography variant="h3" gutterBottom component="div">
+            Register
+          </Typography>
+        </Grid>
+        <Typography variant="h6" gutterBottom component="div">
+          E-mail
+        </Typography>
+        <Box autoComplete="off">
+          <TextField
+            id="email"
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
 
-        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-      </Box>
-      <Typography variant="h6" gutterBottom component="div">
-        Password
-      </Typography>
-      <Box autoComplete="off">
-        <TextField
-          id="outlined-password-input"
-          name="password"
-          type="password"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-        />
-        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-      </Box>
-      <Box autoComplete="off">
-        <TextField
-          id="outlined-password-input2"
-          name="password2"
-          type="password"
-          onChange={formik.handleChange}
-          value={formik.values.password2}
-        />
-        {formik.errors.password2 ? <div>{formik.errors.password2}</div> : null}
-      </Box>
-      <Button variant="contained" type="submit" endIcon={<ChevronRightOutlinedIcon />}>
-        Submit
-      </Button>
-    </form>
+          {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+        </Box>
+        <Typography variant="h6" gutterBottom component="div">
+          Password
+        </Typography>
+        <Box autoComplete="off" mb={1}>
+          <TextField
+            id="outlined-password-input"
+            name="password"
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+        </Box>
+        <Box autoComplete="off" mb={1}>
+          <TextField
+            id="outlined-password-input2"
+            name="password2"
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.password2}
+          />
+          {formik.errors.password2 ? <div>{formik.errors.password2}</div> : null}
+        </Box>
+        <Grid container direction="column" justifyContent="center" alignItems="flex-start">
+          <Grid item mr={1}>
+            <Link to="/login">Already have an account? Log in here!</Link>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="secondary"
+              type="submit"
+              endIcon={<ChevronRightOutlinedIcon />}
+            >
+              Confirm
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </Grid>
   );
 };
 export default Register;

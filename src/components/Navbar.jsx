@@ -11,7 +11,7 @@ import Badge from '@mui/material/Badge';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import ComboBox from './ComboBox';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useGlobalContext } from '../context';
 
 const Search = styled('div')(({ theme }) => ({
@@ -38,7 +38,11 @@ const Navbar = () => {
       <AppBar>
         <Toolbar>
           <NavDrawer />
-          <Typography variant="h6">BunNeed</Typography>
+          <Link to={'/'} style={{ textDecoration: 'none' }}>
+            <Typography sx={{ color: '#000' }} variant="h6">
+              BunNeed
+            </Typography>
+          </Link>
           <Search>
             <ComboBox />
           </Search>
@@ -72,7 +76,7 @@ const Navbar = () => {
                       aria-label="shows the amount in the cart"
                       color="inherit"
                     >
-                      <Badge badgeContent={cart.length} color="error">
+                      <Badge badgeContent={cart.length} color="primary">
                         <ShoppingCartOutlinedIcon />
                       </Badge>
                     </IconButton>

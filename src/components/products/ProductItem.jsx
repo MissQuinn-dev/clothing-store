@@ -35,7 +35,7 @@ const ProductItem = ({ id }) => {
   }, [getProduct]);
   return (
     <Grid container direction="row" justifyContent="center" item sm={12} md={6} lg={4}>
-      <Card style={{ maxWidth: '100%' }}>
+      <Card style={{ maxWidth: '100%' }} color="warning">
         <ButtonBase onClick={() => navigate(`../product/${product.id}`, { replace: true })}>
           <CardMedia component="img" alt={product.title} image={product.image} />
         </ButtonBase>
@@ -54,15 +54,17 @@ const ProductItem = ({ id }) => {
             </Typography>
           </CardContent>
         </Grid>
-
         <CardActions>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => navigate(`category/${product.category}`)}
-          >
-            {product.category}
-          </Button>
+          <Grid>
+            <Button
+              variant="contained"
+              onClick={() =>
+                navigate(`../products/category/${product.category}`, { replace: true })
+              }
+            >
+              {product.category}
+            </Button>
+          </Grid>
           <AddToCartButton product={product} />
         </CardActions>
       </Card>
