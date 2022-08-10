@@ -2,15 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import CartItem from '../components/cart/CartItem';
 import Grid from '@mui/material/Grid';
 import { useGlobalContext } from '../context';
+import { moneyFormatter } from '../utils/moneyFormatter';
 
 const Cart = () => {
   const { cart } = useGlobalContext();
   const allCartItems = [...new Set(cart)];
   const itemAmount = {};
+  let grandTotal = 0;
+  const totals = Array.from(
+    allCartItems.reduce(
+      (thing, { title, price }) => thing.set(title, (thing.get(title) || 0) + price),
+      new Map(),
+    ),
+    ([title, price]) => ({ title, price }),
+  );
+
+  totals.forEach((thing) => {
+    grandTotal = grandTotal + thing.price;
+  });
 
   allCartItems.forEach((product) => {
     itemAmount[product.id] = (itemAmount[product.id] || 0) + 1;
@@ -32,11 +46,7 @@ const Cart = () => {
           </Typography>
 
           <Link to="/" style={{ textDecoration: 'none' }}>
-            <Button
-              style={{ transform: 'translate(10%, -20%)' }}
-              variant="contained"
-              color="secondary"
-            >
+            <Button style={{ transform: 'translate(10%, -20%)' }} variant="contained">
               Take me back home!
             </Button>
           </Link>
@@ -47,13 +57,18 @@ const Cart = () => {
   return (
     <React.Fragment>
       <Grid container spacing={4} justifyContent="center" alignItems="stretch">
-        {eachUniqueItem.map((cartObject, id) => {
-          return <CartItem key={id} {...cartObject} />;
+        {eachUniqueItem.map((cartObject, index) => {
+          return <CartItem key={index} {...cartObject} amount={itemAmount[cartObject.id]} />;
         })}
       </Grid>
-      <Button variant="contained" color="secondary" onClick={() => console.log(itemAmount)}>
-        Test
-      </Button>
+
+      <Grid container direction="row" justifyContent="center" alignItems="flex-start">
+        <Card sx={{ maxWidth: '40%' }}>
+          <Typography m={2} align="center" variant="h4">
+            Total: {moneyFormatter.format(grandTotal)}
+          </Typography>
+        </Card>
+      </Grid>
     </React.Fragment>
   );
 };

@@ -24,13 +24,13 @@ const AddToCartButton = ({ product }) => {
     <div>
       {!userInfo.userId ? (
         <React.Fragment>
-          <Button variant="contained" color="secondary" onClick={() => navigate('/login')}>
+          <Button variant="contained" onClick={() => navigate('/login')}>
             Add to cart
           </Button>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Button variant="contained" color="secondary" onClick={() => addToCart()}>
+          <Button variant="contained" onClick={() => addToCart()}>
             Add to cart
           </Button>
         </React.Fragment>

@@ -4,7 +4,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AppProvider } from './context';
 import { ThemeProvider, createTheme } from '@mui/material';
+import { pink, purple } from '@mui/material/colors';
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: pink[500],
+    },
+    secondary: {
+      main: pink[300],
+    },
+  },
   components: {
     MuiAppBar: {
       styleOverrides: {
