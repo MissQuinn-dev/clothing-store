@@ -30,8 +30,6 @@ const Cart = () => {
     itemAmount[product.id] = (itemAmount[product.id] || 0) + 1;
   });
 
-  console.log(grandTotal);
-
   let eachUniqueItem = allCartItems.filter(function ({ id }) {
     return !this.has(id) && this.add(id);
   }, new Set());

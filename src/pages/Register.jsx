@@ -57,7 +57,6 @@ const Register = () => {
     validate,
     onSubmit: (values) => {
       registerUser(values);
-      console.log(values);
     },
   });
   return (
