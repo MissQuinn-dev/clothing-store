@@ -22,7 +22,7 @@ const ProductCategory = ({ category, image }) => {
     <React.Fragment>
       <Grid container style={{ minHeight: 400 }} direction="row">
         <CardContent>
-          <CardMedia component="img" alt={category} image={image} style={{ maxHeight: 405 }} />
+          <CardMedia component="img" alt={category} image={image} style={{ maxHeight: 400 }} />
           <div
             style={{
               position: 'absolute',

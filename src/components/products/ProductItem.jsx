@@ -35,7 +35,7 @@ const ProductItem = ({ id }) => {
   }, [getProduct]);
   return (
     <Grid container direction="row" justifyContent="center" item sm={12} md={6} lg={4}>
-      <Card style={{ maxWidth: '100%' }} color="warning">
+      <Card style={{ maxWidth: '100%' }}>
         <ButtonBase onClick={() => navigate(`../product/${product.id}`, { replace: true })}>
           <CardMedia component="img" alt={product.title} image={product.image} />
         </ButtonBase>
