@@ -4,7 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AppProvider } from './context';
 import { ThemeProvider, createTheme } from '@mui/material';
-import { pink, purple } from '@mui/material/colors';
+import { pink } from '@mui/material/colors';
 const theme = createTheme({
   palette: {
     primary: {
